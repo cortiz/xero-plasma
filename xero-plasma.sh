@@ -49,6 +49,7 @@ sleep 3
 echo "#############################################"
 echo "           Installing nVidia Drivers         "
 echo "    Not for Hybrid only Single Modern GPU    "
+echo " 'multilib' repo is required. Otherwise fail "
 echo "#############################################"
 echo
 # Function to install regular dkms NVIDIA drivers
