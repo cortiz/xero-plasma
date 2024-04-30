@@ -1,5 +1,13 @@
 # The XeroLinux Plasma Installer Script
 
+<div align="center">
+
+### !!! Warning !!!
+### This script was built for Single nVidia GPU based Desktops nothing else !
+### Do Not use on anything else otherwise suffer the consequences !
+
+</div>
+
 With the help of this script you will be able to install **Plasma** in one of 4 methods as you can see in the image below. Not only that, it will also install the nVidia-dkms drivers and do necessary steps to get things working without you having to lift a finger... Oh yeah it will also fix **PipeWire** and bluetooth.. 
 
 <div align="center">
