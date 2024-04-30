@@ -8,4 +8,4 @@ With the help of this script you will be able to install **Plasma** in one of 4 
 
 </div>
 
-Work is still in progress. Once done I will provide a **Curl** command you will able to use.. As well as a video explaining everything ;)
+Work is still in progress. Once done I will provide a **Curl** command you will able to use.. As well as a video explaining everything. Until then, feel free to inspect the code and make sure you understand everything. ;)
