@@ -2,7 +2,7 @@
 
 <div align="center">
 
-### !!! Warning !!!
+## !!! Warning !!!
 ### This script was built for Single nVidia GPU based Desktops nothing else !
 ### Do Not use on anything else otherwise suffer the consequences !
 
