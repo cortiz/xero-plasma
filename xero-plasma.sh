@@ -51,9 +51,42 @@ echo "           Installing nVidia Drivers         "
 echo "    Not for Hybrid only Single Modern GPU    "
 echo "#############################################"
 echo
-pacman -S --noconfirm --needed linux-headers nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader egl-wayland opencl-nvidia lib32-opencl-nvidia libvdpau-va-gl libvdpau
+# Function to install regular dkms NVIDIA drivers
+install_regular_dkms() {
+    pacman -S --noconfirm --needed linux-headers nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader egl-wayland opencl-nvidia lib32-opencl-nvidia libvdpau-va-gl libvdpau
+}
+
+# Function to install Open-DKMS NVIDIA drivers
+install_open_dkms() {
+    pacman -S --noconfirm --needed linux-headers nvidia-open-dkms nvidia-utils lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader egl-wayland opencl-nvidia lib32-opencl-nvidia libvdpau-va-gl libvdpau
+}
+
+    lspci_output="$(lspci | grep -oP '^.*VGA[^:]+:\s*\K.*NVIDIA.*\](?=\s*\(.*)' | sed -E 's/(\[)/\1[0;1;91m/g ; s/(\])/[0m\1/g' | grep -v '^\s*$' || :)"
+    if [[ -n "${lspci_output:-}" ]]; then
+        printf '%s\n' \
+            '' \
+            "The following nVidia GPU was detected :" \
+            '' \
+            "$lspci_output"
+    else
+        echo "${LF}Hello ${USER:=$(whoami)}, you seem to have no nVidia GPUs."
+    fi
 echo
-echo "Configuring for Wayland..."
+# Prompt user to choose NVIDIA driver type
+read -p "Select driver to install. Enter 'r' for regular or 'o' for Open-DKMS: " driver_type
+
+# Check user input and install corresponding drivers
+if [[ $driver_type == "r" ]]; then
+    install_regular_dkms
+elif [[ $driver_type == "o" ]]; then
+    install_open_dkms
+else
+    echo "Invalid input. Please enter 'r' or 'o'."
+    exit 1
+fi
+
+# Configuration steps common to both driver types
+echo "Configuring Modules..."
 echo
 sed -i '/^MODULES=(/ s/)$/ nvidia nvidia_modeset nvidia_uvm nvidia_drm)/' /etc/mkinitcpio.conf
 sleep 3
