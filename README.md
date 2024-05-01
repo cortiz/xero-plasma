@@ -36,7 +36,7 @@ archinstall --advanced
 ```
 
 **- Step 3 :**
-Go through the mothions skipping the **Profiles** and **Additional Packages** steps ignoring them completly, don't forget to set parallel downloads to as many as you want for faster downloads, also make sure to activate the **multilib** repository, if you forget you will have to start over coz my script will fail otherwise.
+Go through the mothions skipping the **Profiles** and **Additional Packages** steps ignoring them completly, don't forget to set parallel downloads to as many as you want for faster downloads, also make sure to activate the **multilib** repository, if you forget you will have to start over coz my script will fail otherwise. Oh and skip GPU Drivers, since script will do that for you, and select **NetworkManager** for your network. 
 
 Finally select install, and let it do its thing, won't take long as it will just install basic packages nothing too big. Once it's done, it will prompt you if you want to **chroot** into your installed system, select yes since you don't have **Plasma** installed yet... 
 
