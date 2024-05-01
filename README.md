@@ -4,7 +4,7 @@
 
 ### !!! Warning !!!
 
-### This script is intended for Single nVidia GPU based Desktops nothing else !
+### Intended for Single nVidia GPU based Desktops ONLY !
 **( ... For now )**
 </div>
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
