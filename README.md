@@ -1,4 +1,4 @@
-# The XeroLinux Plasma Installer Script
+# The Plasma Installer Script
 
 <div align="center">
 
