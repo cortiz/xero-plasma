@@ -42,7 +42,7 @@ Finally select install, and let it do its thing, won't take long as it will just
 **- Step 4 :**
 Now is the time to run my script. To do so, type the below command in terminal, hit enter and have fun.. A video will be made soon and added here, so keep it locked to this git...
 ```
-bash -c "$(curl -fsSL https://tinyurl.com/PlasmaSetup)"
+bash -c "$(curl -fsSL https://tinyurl.com/PlasmaInstall)"
 ```
 
 To report any issues or suggest quality of life modifications to script please feel free to do so on the [**Issues**](https://github.com/xerolinux/xero-plasma/issues) page. Otherwise I won't be able to get to them fast enough or at all. Thanks.
