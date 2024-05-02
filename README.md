@@ -6,11 +6,10 @@
 
 ### Intended for Single nVidia GPU based Desktops ONLY !
 
+------------------------------------------------
 </div>
------------------------------------------------------------------------------------------------------------------------------------------------------------------
-<br />
 
-With the help of this script you will be able to install **Plasma** in one of 4 methods as you can see in the image below. Not only that, it will also install the nVidia-dkms drivers and do necessary steps to get things working without you having to lift a finger... Oh yeah it will also fix **PipeWire** and bluetooth.. 
+With the help of this script you will be able to install **Plasma** in one of 4 methods as you can see in the image below. Not only that, it will also install the nVidia-dkms drivers and do necessary steps to get things working without you having to lift a finger... Oh yeah it will also fix **PipeWire** and **Bluetooth**.. Make sure to inspect the script [**Here**](https://github.com/xerolinux/xero-plasma/blob/main/xero-plasma.sh) before running it to see what and how it does things...
 <br />
 
 <div align="center">
@@ -36,7 +35,7 @@ archinstall --advanced
 ```
 
 **- Step 3 :**
-Go through the mothions skipping the **Profiles** and **Additional Packages** steps ignoring them completly, don't forget to set parallel downloads to as many as you want for faster downloads, also make sure to activate the **multilib** repository, if you forget you will have to start over coz my script will fail otherwise. Oh and skip GPU Drivers, since script will do that for you, and select **NetworkManager** for your network. 
+Go through the mothions skipping the **Profiles** and **Additional Packages** steps ignoring them completly, don't forget to set parallel downloads to as many as you want for faster downloads, also make sure to activate the **multilib** repository, if you forget you will have to start over coz my script will fail otherwise. Oh and skip GPU Drivers, since script will do that for you (Modern nVidia only), and select **NetworkManager** for your network. 
 
 Finally select install, and let it do its thing, won't take long as it will just install basic packages nothing too big. Once it's done, it will prompt you if you want to **chroot** into your installed system, select yes since you don't have **Plasma** installed yet... 
 
