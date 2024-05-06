@@ -62,41 +62,49 @@ install_open_dkms() {
     pacman -S --noconfirm --needed linux-headers nvidia-open-dkms nvidia-utils lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader egl-wayland opencl-nvidia lib32-opencl-nvidia libvdpau-va-gl libvdpau
 }
 
-    lspci_output="$(lspci | grep -oP '^.*VGA[^:]+:\s*\K.*NVIDIA.*\](?=\s*\(.*)' | sed -E 's/(\[)/\1[0;1;91m/g ; s/(\])/[0m\1/g' | grep -v '^\s*$' || :)"
-    if [[ -n "${lspci_output:-}" ]]; then
-        printf '%s\n' \
-            '' \
-            "The following nVidia GPU was detected :" \
-            '' \
-            "$lspci_output"
+# Function to install Intel drivers
+install_intel() {
+    pacman -S --noconfirm --needed mesa lib32-mesa vulkan-intel lib32-vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader intel-media-driver intel-gmmlib onevpl-intel-gpu mesa-vdpau lib32-mesa-vdpau gstreamer-vaapi libva-mesa-driver lib32-libva-mesa-driver intel-gmmlib
+}
+
+# Detect NVIDIA GPU
+lspci_output="$(lspci | grep -oP '^.*VGA[^:]+:\s*\K.*NVIDIA.*\](?=\s*\(.*)' | sed -E 's/(\[)/\1[0;1;91m/g ; s/(\])/[0m\1/g' | grep -v '^\s*$' || :)"
+if [[ -n "${lspci_output:-}" ]]; then
+    printf '%s\n' \
+        '' \
+        "The following nVidia GPU was detected :" \
+        '' \
+        "$lspci_output"
+    echo
+    # Prompt user to choose NVIDIA driver type
+    read -p "Select driver to install. Enter 'r' for regular or 'o' for Open-DKMS, otherwise 'i' for Intel : " driver_type
+
+    # Check user input and install corresponding drivers
+    if [[ $driver_type == "r" ]]; then
+        install_regular_dkms
+    elif [[ $driver_type == "o" ]]; then
+        install_open_dkms
+    elif [[ $driver_type == "i" ]]; then
+        install_intel
     else
-        echo "${LF}Hello ${USER:=$(whoami)}, you seem to have no nVidia GPUs."
+        echo "Invalid input. Please enter 'r' or 'o'."
+        exit 1
     fi
-echo
-# Prompt user to choose NVIDIA driver type
-read -p "Select driver to install. Enter 'r' for regular or 'o' for Open-DKMS: " driver_type
 
-# Check user input and install corresponding drivers
-if [[ $driver_type == "r" ]]; then
-    install_regular_dkms
-elif [[ $driver_type == "o" ]]; then
-    install_open_dkms
+    # Configuration steps common to NVIDIA driver types
+    echo "Configuring Modules..."
+    echo
+    sed -i '/^MODULES=(/ s/)$/ nvidia nvidia_modeset nvidia_uvm nvidia_drm)/' /etc/mkinitcpio.conf
+    sleep 3
+    systemctl enable nvidia-suspend.service nvidia-hibernate.service nvidia-resume.service nvidia-powerd.service
+    sleep 3
+    echo -e 'options nvidia NVreg_UsePageAttributeTable=1 NVreg_InitializeSystemMemoryAllocations=0 NVreg_DynamicPowerManagement=0x02' | tee -a /etc/modprobe.d/nvidia.conf
+    echo -e 'options nvidia_drm modeset=1 fbdev=1' | tee -a /etc/modprobe.d/nvidia.conf
+    mkinitcpio -P
+    sleep 3
 else
-    echo "Invalid input. Please enter 'r' or 'o'."
-    exit 1
+    echo "${LF}Hello ${USER:=$(whoami)}, you seem to have no nVidia GPUs."
 fi
-
-# Configuration steps common to both driver types
-echo "Configuring Modules..."
-echo
-sed -i '/^MODULES=(/ s/)$/ nvidia nvidia_modeset nvidia_uvm nvidia_drm)/' /etc/mkinitcpio.conf
-sleep 3
-systemctl enable nvidia-suspend.service nvidia-hibernate.service nvidia-resume.service nvidia-powerd.service
-sleep 3
-echo -e 'options nvidia NVreg_UsePageAttributeTable=1 NVreg_InitializeSystemMemoryAllocations=0 NVreg_DynamicPowerManagement=0x02' | tee -a /etc/modprobe.d/nvidia.conf
-echo -e 'options nvidia_drm modeset=1 fbdev=1' | tee -a /etc/modprobe.d/nvidia.conf
-mkinitcpio -P
-sleep 3
 echo
 echo "##############################################"
 echo "   Adding XeroLinux Repo, Bluetooth & More.   "
