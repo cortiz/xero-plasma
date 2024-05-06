@@ -148,17 +148,18 @@ result=$(systemd-detect-virt)
 case $result in
     oracle)
         echo "Installing virtualbox-guest-utils..."
-        sudo pacman -S --noconfirm --needed virtualbox-guest-utils
+        pacman -S --noconfirm --needed virtualbox-guest-utils
         ;;
     kvm)
         echo "Installing qemu-guest-agent and spice-vdagent..."
-        sudo pacman -S --noconfirm --needed qemu-guest-agent spice-vdagent qemu-hw-display-qxl xf86-video-qxl
+        pacman -S --noconfirm --needed qemu-guest-agent spice-vdagent qemu-hw-display-qxl xf86-video-qxl
         ;;
     vmware)
         echo "Installing xf86-video-vmware and open-vm-tools..."
-        sudo pacman -S --noconfirm --needed xf86-video-vmware open-vm-tools xf86-input-vmmouse
+        pacman -S --noconfirm --needed xf86-video-vmware open-vm-tools xf86-input-vmmouse
+        echo
         echo "Enabling vmtoolsd.service..."
-        sudo systemctl enable vmtoolsd.service
+        systemctl enable vmtoolsd.service
         ;;
     *)
         echo "You are not running in a VM."
