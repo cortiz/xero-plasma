@@ -141,6 +141,150 @@ echo "Installing other useful applications..."
 echo
 pacman -S --needed --noconfirm meld timeshift elisa mpv gnome-disk-utility btop 
 echo
+echo "Detecting if you are using a VM"
+echo
+result=$(systemd-detect-virt)
+
+while [ -e "/var/lib/pacman/db.lck" ];
+do
+    echo 'Pacman is not ready yet. Will try again in 5 seconds.'
+    seconds=$(($seconds + 5))
+    sleep 5
+    if [[ "$seconds" == "30" ]]; then
+        echo 'Warning: removing pacman db.lck!'
+        rm /var/lib/pacman/db.lck
+    fi
+done
+
+echo "You are working on "$result
+
+if [ $result = "oracle" ];
+	then
+		#remove vmware
+		if pacman -Qi open-vm-tools &> /dev/null; then
+			systemctl disable vmtoolsd.service
+			echo "Disabled vmtoolsd.service"
+			pacman -Rns open-vm-tools --noconfirm
+			echo "Removed open-vm-tools"
+		fi
+
+		if pacman -Qi xf86-video-vmware &> /dev/null; then
+			pacman -Rns xf86-video-vmware --noconfirm
+			echo "Removed xf86-video-vmware"
+		fi
+
+		if [ -f /etc/systemd/system/multi-user.target.wants/vmtoolsd.service ]; then
+	   		rm /etc/systemd/system/multi-user.target.wants/vmtoolsd.service
+			echo "Removed vmtoolsd.service if still exists"
+		fi
+
+		#remove qemu
+		if pacman -Qi qemu-guest-agent &> /dev/null; then
+			systemctl disable qemu-guest-agent.service
+			pacman -Rns qemu-guest-agent --noconfirm
+			echo "Removed qemu-guest-agent"
+		fi
+fi
+
+if [ $result = "kvm" ];
+	then
+		#install kvm stuff
+		pacman -S --noconfirm qemu-guest-agent spice-vdagent
+  
+    #remove vmware
+		if pacman -Qi open-vm-tools &> /dev/null; then
+			systemctl disable vmtoolsd.service
+			echo "Disabled vmtoolsd.service"
+			pacman -Rns open-vm-tools --noconfirm
+			echo "Removed open-vm-tools"
+		fi
+
+		if pacman -Qi xf86-video-vmware &> /dev/null; then
+			pacman -Rns xf86-video-vmware --noconfirm
+			echo "Removed xf86-video-vmware"
+		fi
+
+		if [ -f /etc/systemd/system/multi-user.target.wants/vmtoolsd.service ]; then
+	   		rm /etc/systemd/system/multi-user.target.wants/vmtoolsd.service
+			echo "Removed vmtoolsd.service if still exists"
+		fi
+
+		#remove virtualbox
+		if pacman -Qi virtualbox-guest-utils &> /dev/null; then
+			systemctl disable vboxservice.service
+			pacman -Rns virtualbox-guest-utils --noconfirm
+			echo "Removed virtualbox-guest-utils"
+		fi
+		if pacman -Qi virtualbox-guest-utils-nox &> /dev/null; then
+			systemctl disable vboxservice.service
+			pacman -Rns virtualbox-guest-utils-nox --noconfirm
+			echo "Removed virtualbox-guest-utils-nox"
+		fi
+fi
+
+if [ $result = "vmware" ];
+	then
+		#remove virtualbox
+		if pacman -Qi virtualbox-guest-utils &> /dev/null; then
+			systemctl disable vboxservice.service
+			pacman -Rns virtualbox-guest-utils --noconfirm
+			echo "Removed virtualbox-guest-utils"
+		fi
+		if pacman -Qi virtualbox-guest-utils-nox &> /dev/null; then
+			systemctl disable vboxservice.service
+			pacman -Rns virtualbox-guest-utils-nox --noconfirm
+			echo "Removed virtualbox-guest-utils-nox"
+		fi
+
+		#remove qemu
+		if pacman -Qi qemu-guest-agent &> /dev/null; then
+			systemctl disable qemu-guest-agent.service
+			pacman -Rns qemu-guest-agent --noconfirm
+			echo "Removed qemu-guest-agent"
+		fi
+fi
+
+if [ $result = "none" ];
+	then
+		#remove virtualbox
+		if pacman -Qi virtualbox-guest-utils &> /dev/null; then
+			systemctl disable vboxservice.service
+			pacman -Rns virtualbox-guest-utils --noconfirm
+			echo "Removed virtualbox-guest-utils"
+		fi
+
+		if pacman -Qi virtualbox-guest-utils-nox &> /dev/null; then
+			systemctl disable vboxservice.service
+			pacman -Rns virtualbox-guest-utils-nox --noconfirm
+			echo "Removed virtualbox-guest-utils-nox"
+		fi
+
+		#remove vmware
+		if pacman -Qi open-vm-tools &> /dev/null; then
+			systemctl disable vmtoolsd.service
+			echo "Disabled vmtoolsd.service"
+			pacman -Rns open-vm-tools --noconfirm
+			echo "Removed open-vm-tools"
+		fi
+
+		if pacman -Qi xf86-video-vmware &> /dev/null; then
+			pacman -Rns xf86-video-vmware --noconfirm
+			echo "Removed xf86-video-vmware"
+		fi
+
+		if [ -f /etc/systemd/system/multi-user.target.wants/vmtoolsd.service ]; then
+	   		rm /etc/systemd/system/multi-user.target.wants/vmtoolsd.service
+			echo "Removed vmtoolsd.service if still exists"
+		fi
+
+		#remove qemu
+		if pacman -Qi qemu-guest-agent &> /dev/null; then
+			systemctl disable qemu-guest-agent.service
+			pacman -Rns qemu-guest-agent --noconfirm
+			echo "Removed qemu-guest-agent"
+		fi
+fi
+echo
 echo "#############################################"
 echo "          Done, now exit and reboot          "
 echo " For further customization, plz use XeroCLI. "
