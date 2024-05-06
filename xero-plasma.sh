@@ -77,15 +77,13 @@ if [[ -n "${lspci_output:-}" ]]; then
         "$lspci_output"
     echo
     # Prompt user to choose NVIDIA driver type
-    read -p "Select driver to install. Enter 'r' for regular or 'o' for Open-DKMS, otherwise 'i' for Intel : " driver_type
+    read -p "Select driver to install. Enter 'r' for regular or 'o' for Open-DKMS : " driver_type
 
     # Check user input and install corresponding drivers
     if [[ $driver_type == "r" ]]; then
         install_regular_dkms
     elif [[ $driver_type == "o" ]]; then
         install_open_dkms
-    elif [[ $driver_type == "i" ]]; then
-        install_intel
     else
         echo "Invalid input. Please enter 'r' or 'o'."
         exit 1
@@ -103,7 +101,8 @@ if [[ -n "${lspci_output:-}" ]]; then
     mkinitcpio -P
     sleep 3
 else
-    echo "${LF}Hello ${USER:=$(whoami)}, you seem to have no nVidia GPUs."
+    echo "${LF}Hello ${USER:=$(whoami)}, no nVidia GPUs detected. Defaulting to Intel drivers."
+    install_intel
 fi
 echo
 echo "##############################################"
