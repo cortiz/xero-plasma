@@ -191,7 +191,7 @@ if [ $result = "kvm" ];
 		#install kvm stuff
 		pacman -S --noconfirm qemu-guest-agent spice-vdagent
   
-    #remove vmware
+    		#remove vmware
 		if pacman -Qi open-vm-tools &> /dev/null; then
 			systemctl disable vmtoolsd.service
 			echo "Disabled vmtoolsd.service"
