@@ -102,6 +102,7 @@ if [[ -n "${lspci_output:-}" ]]; then
     sleep 3
 else
     echo "${LF}Hello ${USER:=$(whoami)}, no nVidia GPUs detected. Defaulting to Intel drivers."
+    echo
     install_intel
 fi
 echo
@@ -139,6 +140,36 @@ echo
 echo "Installing other useful applications..."
 echo
 pacman -S --needed --noconfirm meld timeshift elisa mpv gnome-disk-utility btop 
+echo
+echo "Removing unnecessary CPU U-Code..."
+echo
+cpu_vendor=$(cat /proc/cpuinfo | awk '/vendor_id/ {print $3}' | head -n 1)
+
+if [[ "$cpu_vendor" == "GenuineIntel" ]]; then
+    echo "Intel CPU detected."
+    sudo pacman -Rdd --noconfirm amd-ucode
+elif [[ "$cpu_vendor" == "AuthenticAMD" ]]; then
+    echo "AMD CPU detected."
+    sudo pacman -Rdd --noconfirm intel-ucode
+else
+    echo "Unknown CPU vendor: $cpu_vendor"
+    sudo pacman -Rdd --noconfirm intel-ucode amd-ucode
+fi
+echo
+echo "Removing Unnecessary FS-Progs..."
+echo
+if lsblk -f | grep -q "btrfs"; then
+    echo -e "${GREEN}BTRFS partitions found. Removing XFS-Progs.${NC}"
+    echo
+    sudo pacman -Rdd --noconfirm xfsprogs
+elif lsblk -f | grep -q "xfs"; then
+    echo -e "${RED}XFS partitions found. Removing BTRFS-Progs.${NC}"
+    echo
+    sudo pacman -Rdd --noconfirm btrfs-progs
+else
+    echo -e "${BLUE}No XFS or BTRFS partitions found. Removing both Progs Packages.${NC}"
+    sudo pacman -Rdd --noconfirm xfsprogs btrfs-progs
+fi
 echo
 echo "#############################################"
 echo "          Done, now exit and reboot          "
