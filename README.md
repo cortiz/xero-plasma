@@ -1,6 +1,6 @@
 # The Plasma Installer Script
 
-With the help of this script you will be able to install **Plasma** in one of 4 methods as you can see in the image below. Not only that, it will also install the nVidia-dkms drivers and do necessary steps to get things working without you having to lift a finger... Oh yeah it will also fix **PipeWire** and **Bluetooth**.. Make sure to inspect the script [**Here**](https://github.com/xerolinux/xero-plasma/blob/main/xero-plasma.sh) before running it to see what and how it does things...
+With the help of this script you will be able to install **Plasma** in one of 4 methods as you can see in the image below. Not only that, it will also fix **PipeWire** and **Bluetooth**.. Make sure to inspect the script [**Here**](https://github.com/xerolinux/xero-plasma/blob/main/xero-plasma.sh) before running it to see what and how it does things...
 <br />
 
 <div align="center">
