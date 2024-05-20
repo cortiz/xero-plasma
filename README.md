@@ -14,7 +14,7 @@ With the help of this script you will be able to install **Plasma** in one of 4 
 
 <div align="center">
 
-![Script](https://i.imgur.com/DJjpFG8.png)
+![Script](https://i.imgur.com/TOZNp4j.png)
 
 </div>
 
