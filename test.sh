@@ -26,9 +26,9 @@ selective_install() {
 
 # Main menu using dialog
 main_menu() {
-  CHOICE=$(dialog --stdout --title ">> XeroLinux Plasma Install <<" --menu "\nChoose how to install Plasma:" 15 60 4 \
+  CHOICE=$(dialog --stdout --title "XeroLinux Plasma Install" --menu "Zb\Z1Centered Text Message Here\Zn" 20 60 4 \
     1 "Minimal  : Minimal install (Older PCs)." \
-    2 "Complete : Full Plasma install (All Packages)." \
+    2 "Complete : Full install (Bloated Install)." \
     3 "Curated  : Xero's Curated set of Plasma packages." \
     4 "Selective: Individual package selection (Advanced).")
 
@@ -74,7 +74,7 @@ if dialog --stdout --title "Install Paru & Xero-Toolkit" --yesno "Would you like
 fi
 
 echo "Installing PipeWire packages..."
-install_packages "gstreamer gst-libav gst-plugins-bad gst-plugins-base gst-plugins-ugly gst-plugins-good libdvdcss alsa-utils alsa-firmware pavucontrol lib32-pipewire-jack libpipewire pipewire-v4l2 pipewire-x11-bell pipewire-zeroconf realtime-privileges sof-firmware ffmpeg ffmpegthumbs ffnvcodec-headers"
+install_packages "gstreamer gst-libav gst-plugins-bad gst-plugins-base gst-plugins-ugly libdvdcss alsa-utils alsa-firmware pavucontrol lib32-pipewire-jack libpipewire pipewire-v4l2 pipewire-x11-bell pipewire-zeroconf realtime-privileges sof-firmware ffmpeg ffmpegthumbs ffnvcodec-headers"
 
 echo "Installing Bluetooth packages..."
 install_packages "bluez bluez-utils bluez-plugins bluez-hid2hci bluez-cups bluez-libs bluez-tools"
