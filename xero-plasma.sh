@@ -78,7 +78,7 @@ os-prober
 grub-mkconfig -o /boot/grub/grub.cfg
 
 echo "Installing other useful applications..."
-install_packages "meld timeshift elisa mpv gnome-disk-utility btop gum inxi"
+install_packages "linux-headers meld timeshift elisa mpv gnome-disk-utility btop gum inxi"
 
 echo "Detecting if you are using a VM"
 result=$(systemd-detect-virt)
