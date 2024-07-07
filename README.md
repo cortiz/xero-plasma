@@ -36,7 +36,7 @@ Now is the time to run my script. To do so, type the below command in terminal, 
 bash -c "$(curl -fsSL https://tinyurl.com/PlasmaInstall)"
 ```
 
-Full Guide :
+### Full Guide :
 
 > For a more full in-depth guide with video included, feel free to check it out on our [**Official Site**](https://xerolinux.xyz/xero-news/xerolinux-plasma/) where we go over each step in detail. Video and written guide are to be used in tandem, as in together, otherwise you will surely get lost.
 
