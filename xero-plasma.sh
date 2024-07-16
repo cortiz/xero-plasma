@@ -89,7 +89,7 @@ case $result in
     ;;
   kvm)
     echo "Installing qemu-guest-agent and spice-vdagent..."
-    install_packages "qemu-guest-agent spice-vdagent qemu-hw-display-qxl xf86-video-qxl"
+    install_packages "qemu-guest-agent spice-vdagent"
     ;;
   vmware)
     echo "Installing xf86-video-vmware and open-vm-tools..."
