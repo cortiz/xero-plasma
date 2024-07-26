@@ -28,6 +28,10 @@ archinstall --advanced
 **- Step 3 :**
 Go through the mothions skipping the **Profiles** and **Additional Packages** steps ignoring them completly, don't forget to set parallel downloads to as many as you want for faster downloads. Oh and skip GPU Drivers, since you will be able to do that and more via my toolkit which will be offered during install, and select **NetworkManager** for your network (Will be installed by this script anyway).
 
+**Note :**
+
+> This guide expects you to be connected to the internet via ethernet. If you aren’t and need to connect over WiFi, you can follow guide on the [**ArchWiki**](https://wiki.archlinux.org/title/Installation_guide#Connect_to_the_internet)
+
 Finally select install, and let it do its thing, won't take long as it will just install basic packages nothing too big. Once it's done, it will prompt you if you want to **chroot** into your installed system, select yes since you don't have **Plasma** installed yet... 
 
 **- Step 4 :**
