@@ -55,6 +55,4 @@ chmod +x PlasmaInstall && ./PlasmaInstall
 
 To report any issues or suggest quality of life modifications to script please feel free to do so on the [**Issues**](https://github.com/xerolinux/xero-plasma/issues) page. Otherwise I won't be able to get to them fast enough or at all. Thanks.
 
-**PS :** You can, if you so wish, run script after minimal install and reboot. Just login with your created user, and use root (sudo) since script was written with **Arch-Chroot** in mind. End result is the same. Just don't report issues if you decide to run it this way.. 
-
 Enjoy ;)
