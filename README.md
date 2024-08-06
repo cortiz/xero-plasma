@@ -35,7 +35,11 @@ Go through the mothions skipping the **Profiles** and **Additional Packages** st
 Finally select install, and let it do its thing, won't take long as it will just install basic packages nothing too big. Once it's done, it will prompt you if you want to **chroot** into your installed system, select yes since you don't have **Plasma** installed yet... 
 
 **- Step 4 :**
-Now is the time to run my script. To do so, type the below command in terminal, hit enter and have fun.. A video will be made soon and added here, so keep it locked to this git...
+
+> For security, don't just run script, without inspecting it first. So before using _Curl_ command you can examine it => [**HERE**](https://raw.githubusercontent.com/xerolinux/xero-plasma/main/xero-plasma.sh)
+
+Now is the time to run my script. To do so, type the below command in terminal, hit enter and have fun..
+
 ```
 bash -c "$(curl -fsSL https://tinyurl.com/PlasmaInstall)"
 ```
