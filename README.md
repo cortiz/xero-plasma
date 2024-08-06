@@ -1,6 +1,6 @@
 # The Plasma Installer Script
 
-With the help of this script you will be able to install **Plasma** in one of 4 methods as you can see in the image below. Not only that, it will also fix **PipeWire** and **Bluetooth**.. Make sure to inspect the script [**Here**](https://github.com/xerolinux/xero-plasma/blob/main/xero-plasma.sh) before running it to see what and how it does things...
+With the help of this script you will be able to install **Plasma** in one of 4 methods as you can see in the image below. Not only that, it will also fix **PipeWire** and **Bluetooth**..
 <br />
 
 <div align="center">
@@ -35,6 +35,8 @@ Go through the mothions skipping the **Profiles** and **Additional Packages** st
 Finally select install, and let it do its thing, won't take long as it will just install basic packages nothing too big. Once it's done, it will prompt you if you want to **chroot** into your installed system, select yes since you don't have **Plasma** installed yet... 
 
 **- Step 4 :**
+
+**Note :**
 
 > For security, don't just run script, without inspecting it first. So before using _Curl_ command you can examine it => [**HERE**](https://raw.githubusercontent.com/xerolinux/xero-plasma/main/xero-plasma.sh)
 
